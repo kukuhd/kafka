@@ -16,7 +16,7 @@ services:
             ZOOKEEPER_INIT_LIMIT: 5
             ZOOKEEPER_SYNC_LIMIT: 2
             ZOOKEEPER_SERVERS: zookeeper-1:12888:13888;zookeeper-2:22888:23888;zookeeper-3:32888:33888
-
+        restart: always
     zookeeper-2:
         image: confluentinc/cp-zookeeper:latest
         hostname: zookeeper-2
@@ -33,7 +33,7 @@ services:
             ZOOKEEPER_INIT_LIMIT: 5
             ZOOKEEPER_SYNC_LIMIT: 2
             ZOOKEEPER_SERVERS: zookeeper-1:12888:13888;zookeeper-2:22888:23888;zookeeper-3:32888:33888
-
+        restart: always
     zookeeper-3:
         image: confluentinc/cp-zookeeper:latest
         hostname: zookeeper-3
@@ -50,7 +50,8 @@ services:
             ZOOKEEPER_INIT_LIMIT: 5
             ZOOKEEPER_SYNC_LIMIT: 2
             ZOOKEEPER_SERVERS: zookeeper-1:12888:13888;zookeeper-2:22888:23888;zookeeper-3:32888:33888
-                kafka-1:
+        restart: always
+    kafka-1:
         image: confluentinc/cp-kafka:latest
         hostname: kafka-1
         ports:
@@ -73,6 +74,7 @@ services:
             -Dcom.sun.management.jmxremote.port=9999
             -Dcom.sun.management.jmxremote.authenticate=false
             -Dcom.sun.management.jmxremote.ssl=false"
+        restart: always
     kafka-2:
         image: confluentinc/cp-kafka:latest
         hostname: kafka-2
@@ -96,7 +98,7 @@ services:
             -Dcom.sun.management.jmxremote.port=9999
             -Dcom.sun.management.jmxremote.authenticate=false
             -Dcom.sun.management.jmxremote.ssl=false"
-
+        restart: always
     kafka-3:
         image: confluentinc/cp-kafka:latest
         hostname: kafka-3
@@ -120,7 +122,7 @@ services:
             -Dcom.sun.management.jmxremote.port=9999
             -Dcom.sun.management.jmxremote.authenticate=false
             -Dcom.sun.management.jmxremote.ssl=false"
-
+        restart: always
     kafka_manager:
         image: hlebalbau/kafka-manager:stable
         ports:
@@ -129,6 +131,7 @@ services:
             ZK_HOSTS: "zookeeper-1:12181,zookeeper-2:22181,zookeeper-3:32181"
             APPLICATION_SECRET: "random-secret"
             command: -Dpidfile.path=/dev/null
+        restart: always
 networks:
   default:
     external:
